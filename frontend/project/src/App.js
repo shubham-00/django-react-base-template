@@ -1,21 +1,41 @@
-import "./App.css";
 import "antd/dist/antd.css";
 import CustomLayout from "./containers/Layout";
 // import ArticleList from "./containers/ArticleListView";
 import BaseRouter from "./routes";
 import { BrowserRouter as Router } from "react-router-dom";
+import { connect } from "react-redux";
+import * as actions from "./store/actions/auth";
+import { useEffect } from "react";
 
-function App() {
+const App = (props) => {
+	useEffect(() => {
+		props.onTryAutoSignUp();
+	}, []);
+
 	return (
 		<div>
 			<Router>
-				<CustomLayout>
+				<CustomLayout {...props}>
 					<BaseRouter />
 					{/* <ArticleList /> */}
 				</CustomLayout>
 			</Router>
 		</div>
 	);
-}
+};
 
-export default App;
+const mapStateToProps = (state) => {
+	return {
+		isAuthenticated: state.token !== null,
+	};
+};
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		onTryAutoSignUp: () => {
+			dispatch(actions.authCheckState());
+		},
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
