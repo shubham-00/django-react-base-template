@@ -4,7 +4,7 @@ const { Header, Content, Footer } = Layout;
 
 const CustomLayout = (props) => {
 	return (
-		<Layout className="layout">
+		<Layout className="layout" style={{ maxWidth: "100%" }}>
 			<Header>
 				<div className="logo" />
 				<Menu theme="dark" mode="horizontal" defaultSelectedKeys={["2"]}>
@@ -13,8 +13,8 @@ const CustomLayout = (props) => {
 					<Menu.Item key="3">nav 3</Menu.Item>
 				</Menu>
 			</Header>
-			<Content style={{ padding: "0 50px" }}>
-				<Breadcrumb style={{ margin: "16px 0" }}>
+			<Content>
+				<Breadcrumb style={{ margin: "16px 5px" }}>
 					<Breadcrumb.Item>
 						<Link to="/">Home</Link>
 					</Breadcrumb.Item>
@@ -23,7 +23,7 @@ const CustomLayout = (props) => {
 					</Breadcrumb.Item>
 					<Breadcrumb.Item>App</Breadcrumb.Item>
 				</Breadcrumb>
-				<div style={{ minHeight: "280px", padding: "24px", background: "#fff" }}>
+				<div style={{ minHeight: "280px", padding: "2%", background: "#fff" }}>
 					{props.children}
 				</div>
 			</Content>

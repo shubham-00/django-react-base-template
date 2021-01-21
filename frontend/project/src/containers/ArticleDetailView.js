@@ -1,7 +1,7 @@
-import Articles from "../components/Articles";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Card } from "antd";
+import { Card, Button } from "antd";
+import CustomForm from "../components/Form";
 
 const ArticleDetail = (props) => {
 	const listData = [];
@@ -17,6 +17,16 @@ const ArticleDetail = (props) => {
 		});
 	}
 
+	const handleDelete = (event) => {
+		event.preventDefault();
+
+		const articleID = props.match.params.articleID;
+
+		axios.delete(`http://127.0.0.1:8000/api/${articleID}`);
+
+		props.history.push("/");
+	};
+
 	const [article, setArticle] = useState({});
 
 	useEffect(() => {
@@ -28,9 +38,18 @@ const ArticleDetail = (props) => {
 	}, []);
 
 	return (
-		<Card title={article.title}>
-			<p>{article.content}</p>
-		</Card>
+		<>
+			<Card title={article.title}>
+				<p>{article.content}</p>
+			</Card>
+
+			<CustomForm requestType="put" articleID={props.match.params.articleID} btnText="Update" />
+			<form onSubmit={handleDelete}>
+				<Button type="danger" htmlType="submit">
+					Delete
+				</Button>
+			</form>
+		</>
 	);
 };
 
