@@ -16,5 +16,3 @@ const BaseRouter = () => {
 };
 
 export default BaseRouter;
-
-// https://youtu.be/BxzO2M7QcZw?t=4359
